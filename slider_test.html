@@ -110,6 +110,40 @@
   </style>
 </head>
 <body>
+  <script type="text/javascript">
+window.ymConfig = {"bot":"your_bot_id","host":"cloud.yellow.ai"};
+(function() {
+  var w = window, ic = w.YellowMessenger;
+  if (typeof ic === "function") {
+    ic("reattach_activator");
+    ic("update", ymConfig);
+  } else {
+    var d = document, i = function() { i.c(arguments); };
+    function l() {
+      var e = d.createElement("script");
+      e.type = "text/javascript";
+      e.async = true;
+      e.src = "cdn.yellowmessenger.com/plugin/widget-v2/latest/dist/main.min.js";
+      var t = d.getElementsByTagName("script")[0];
+      t.parentNode.insertBefore(e, t);
+    }
+    i.q = [];
+    i.c = function(e) { i.q.push(e); };
+    w.YellowMessenger = i;
+    if (w.attachEvent) {
+      w.attachEvent("onload", l);
+    } else {
+      w.addEventListener("load", l, false);
+    }
+  }
+})();
+
+// Hide the chat widget icon
+if (window.YellowMessengerPlugin && typeof window.YellowMessengerPlugin.hide === "function") {
+  window.YellowMessengerPlugin.hide();
+}
+</script>
+
   <div class="slider-container">
     <div class="slider-wrapper">
       <div class="tooltip" id="tooltip">5</div>
@@ -127,7 +161,6 @@
   <div id="result"></div>
 
   <script>
-    window.YellowMessengerPlugin.hide();
     const slider = document.getElementById("rating-slider");
     const tooltip = document.getElementById("tooltip");
     const submitButton = document.getElementById("submit-button");
