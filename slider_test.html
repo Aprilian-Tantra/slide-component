@@ -107,18 +107,11 @@
       font-size: 1rem; /* Responsive font size */
       color: #333;
     }
+
+    .yellowMessenger-webview {
+      background: white;
+    }
   </style>
-    <script>
-        // Wait for the Yellow.ai Web SDK to load
-        window.onload = function () {
-          // Hide the chat bubble
-          if (typeof yellowMessengerPlugin !== "undefined") {
-            yellowMessengerPlugin.hideWidget();
-          } else {
-            console.error("Yellow.ai Web SDK not loaded");
-          }
-        };
-      </script>
 </head>
 <body>
 
