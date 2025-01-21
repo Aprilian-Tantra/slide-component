@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Styled Slider with Tooltip</title>
+  <title>Styled Slider with Submit</title>
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -14,16 +15,16 @@
 
     body {
       font-family: Arial, sans-serif;
-      background-color: #dfe3e7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background-color: #fff;
     }
 
     .slider-container {
-      width: 80%;
-      max-width: 400px;
+      width: 100%;
+			position: absolute;
+      top: 60%; /* Lowered the position by 5% */
+      left: 50%;
+      transform: translate(-50%, -50%);
+			padding: 10px;
     }
 
     .slider-wrapper {
@@ -70,27 +71,24 @@
       justify-content: center;
     }
 
-    .tooltip::after {
-      content: "";
-      position: absolute;
-      bottom: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 6px;
-      border-style: solid;
-      border-color: #19457a transparent transparent transparent;
+    .submit-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 10px;
+      text-align: left; /* Keeps the button aligned to the left */
     }
 
     .labels {
       display: flex;
       justify-content: space-between;
-      font-size: 0.85rem;
+      font-size: 0.75rem; /* Responsive font size */
       color: #555;
+      margin-top: -10px;
     }
 
     .submit-container {
-      display: flex;
-      justify-content: center;
       margin-top: 15px;
     }
 
@@ -110,9 +108,8 @@
 
     #result {
       margin-top: 10px;
-      font-size: 1rem;
+      font-size: 1rem; /* Responsive font size */
       color: #333;
-      text-align: center;
     }
   </style>
 </head>
@@ -150,8 +147,9 @@
       tooltip.textContent = value;
 
       // Center the tooltip above the slider thumb
+      const thumbWidth = 18; // Width of the slider thumb
       const tooltipWidth = tooltip.offsetWidth;
-      const offset = (sliderWidth * (percentage / 100)) - (tooltipWidth / 2);
+      const offset = (sliderWidth - thumbWidth) * (percentage / 100) + (thumbWidth / 2) - (tooltipWidth / 2);
       tooltip.style.left = `${offset}px`;
     }
 
@@ -166,7 +164,7 @@
       submitButton.disabled = true;
 
       // Update result on the page
-      result.textContent = `You selected: ${ratingValue}`;
+      // result.textContent = `You selected: ${ratingValue}`;
 
       // Post the message to the parent window
       window.parent.postMessage({
